@@ -1,0 +1,36 @@
+<html>
+    <head>
+        <script>
+            function random_function()
+            {
+                var a=document.getElementById("input").value;
+                if(a==="INDIA")
+                {
+                    var arr=["Maharashtra","Delhi"];
+                }
+                else if(a==="USA")
+                {
+                    var arr=["Washington","Texas","New York"];
+                }
+             
+                var string="";
+             
+                for(i=0;i<arr.length;i++)
+                {
+                    string=string+"<option value="+arr[i]+">"+arr[i]+"</option>";
+                }
+                document.getElementById("output").innerHTML=string;
+            }
+        </script>
+    </head>
+    <body>
+        <select id="input" onchange="random_function()">
+            <option>select option</option>
+            <option>INDIA</option>
+            <option>USA</option>
+        </select>
+        <div>
+           <select id="output" onchange="random_function1()">
+        </div>
+    </body>
+</html>

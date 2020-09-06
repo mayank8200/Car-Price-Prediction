@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html >
+<!--From https://codepen.io/frytyler/pen/EGdtg-->
+<head>
+  <meta charset="UTF-8">
+  <title>Predict Your Car Price</title>
+  <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+
+  
+<style>
+  ::placeholder {
+    color:rgb(13, 13, 14);
+    opacity:0.8; /* Firefox */
+    font-weight: bold;
+  }
+  </style>
+  
+</head>
+<body style="background-image: url('{{ url_for('static', filename='house.png') }}'); 
+background-repeat:no-repeat;
+background-size:cover;
+height:100vh;
+display:flex;
+">
+
+ <div class="login">
+	<h1>Predict Your Housing Price</h1>
+
+     <!-- Main Input For Receiving Query to our ML -->
+    <form name="myform" action="{{ url_for('predict')}}"method="post" onsubmit="return(validateform());">
+        <input type="text" style="background-color:rgba(219, 228, 236,0.5)" name="Model Name" placeholder="Model Name" required="required" /><br>
+        <input type="text" style="background-color:rgba(219, 228, 236,0.5)" name="Year of Purchase" placeholder="Year of Purchase" required="required" /><br>
+        <input type="text" style="background-color:rgba(219, 228, 236,0.5)" name="kms Driven" placeholder="kms Driven" required="required" /><br>
+        <select name="fuel" style="background-color:rgba(219, 228, 236,0.5);width: 400px;height: 35px;padding: 10px;margin-bottom: 10px;font-size: 13px;text-shadow: 1px 1px 1px rgb(0,0,0);border: 1px solid rgba(0,0,0,0.3);border-radius: 4px;box-shadow: inset 0 -5px 45px rgba(100,100,100,0.2), 0 1px 1px rgba(255,255,255,0.2);">
+        <option value="Fuel Type" style="color: aliceblue;">Fuel Type</option>
+        <option value="Petrol">Petrol</option>
+        <option value="Diesel">Diesel</option>
+        <option value="LPG">LPG</option>
+        <option value="CNG">CNG</option>
+		<option value="Electric">Electric</option>
+		</select>
+		<select name="seller_type" style="background-color:rgba(219, 228, 236,0.5);width: 400px;height: 35px;padding: 10px;margin-bottom: 10px;font-size: 13px;text-shadow: 1px 1px 1px rgb(0,0,0);border: 1px solid rgba(0,0,0,0.3);border-radius: 4px;box-shadow: inset 0 -5px 45px rgba(100,100,100,0.2), 0 1px 1px rgba(255,255,255,0.2);">
+        <option value="Seller Type" style="color: aliceblue;">Seller Type</option>
+        <option value="Individual">Individual</option>
+        <option value="Dealer">Dealer</option>
+        <option value="Trustmark Dealer">Trustmark Dealer</option>
+        </select>
+		<select name="transmission" style="background-color:rgba(219, 228, 236,0.5);width: 400px;height: 35px;padding: 10px;margin-bottom: 10px;font-size: 13px;text-shadow: 1px 1px 1px rgb(0,0,0);border: 1px solid rgba(0,0,0,0.3);border-radius: 4px;box-shadow: inset 0 -5px 45px rgba(100,100,100,0.2), 0 1px 1px rgba(255,255,255,0.2);">
+        <option value="Transmission" style="color: aliceblue;">Transmission</option>
+        <option value="Automatic">Automatic</option>
+        <option value="Manual">Manual</option>
+        </select>
+		<select name="Owner Type" style="background-color:rgba(219, 228, 236,0.5);width: 400px;height: 35px;padding: 10px;margin-bottom: 10px;font-size: 13px;text-shadow: 1px 1px 1px rgb(0,0,0);border: 1px solid rgba(0,0,0,0.3);border-radius: 4px;box-shadow: inset 0 -5px 45px rgba(100,100,100,0.2), 0 1px 1px rgba(255,255,255,0.2);">
+        <option value="Owner Type" style="color: aliceblue;">Owner Type</option>
+        <option value="First Owner">First Owner</option>
+        <option value="Second Owner">Second Owner</option>
+        <option value="Third Owner">Third Owner</option>
+        <option value="Fourth & Above Owner">Fourth & Above Owner</option>
+		<option value="Test Drive Car">Test Drive Car</option>
+		</select>
+       
+        <button type="submit" class="btn btn-primary btn-block btn-large" style="margin-bottom: 10px;">Predict</button>
+
+        
+        <!--<a href="visual" class="btn btn-primary btn-block btn-large" style="text-decoration: none;">Visualize</a>-->
+    </form>
+    <div>
+     <b> <p style="width: 100%; font-size: medium; color:black;">{{ prediction_text }}<br></p></b>
+     </div>
+ </div>
+
+
+
+</body>
+</html>
