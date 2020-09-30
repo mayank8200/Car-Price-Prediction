@@ -1,5 +1,5 @@
 import numpy as np
-from flask import Flask, request, jsonify, render_template
+from flask import Flask, request, render_template
 import pickle
 
 app = Flask(__name__)
@@ -7,11 +7,12 @@ model = pickle.load(open('regressor.pkl', 'rb'))
 lb = pickle.load(open('lb', 'rb'))
 lb1 = pickle.load(open('lb1', 'rb'))
 
-
+#HomePage
 @app.route('/')
 def home():
     return render_template('index.html')
 
+#prediction of car price
 @app.route('/predict',methods=['POST'])
 def predict():
     '''
